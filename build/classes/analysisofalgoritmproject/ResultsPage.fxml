@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #302B27;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="analysisofalgoritmproject.ResultsPageController">
+   <children>
+      <ScrollPane layoutX="14.0" layoutY="137.0" prefHeight="598.0" prefWidth="548.0">
+         <content>
+            <Label fx:id="text">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+         </content>
+      </ScrollPane>
+      <ScrollPane layoutX="579.0" layoutY="342.0" prefHeight="394.0" prefWidth="406.0" style="-fx-background: #274690; -fx-background-color: transparent;">
+         <content>
+            <AnchorPane fx:id="scrollpane" prefHeight="218.0" prefWidth="386.0">
+               <children>
+                  <Label layoutX="42.0" text="Name">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="230.0" text="Qty">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <Label layoutX="579.0" layoutY="137.0" text="Total Profit: " textFill="WHITE">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="579.0" layoutY="235.0" text="Total Cost: " textFill="WHITE">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <Label fx:id="totalProfit" alignment="CENTER" layoutX="575.0" layoutY="184.0" prefHeight="47.0" prefWidth="406.0" style="-fx-background-color: rgba(255,255,255,0.5); -fx-background-radius: 10;" textFill="WHITE">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="totalCost" alignment="CENTER" layoutX="579.0" layoutY="282.0" prefHeight="47.0" prefWidth="406.0" style="-fx-background-color: rgba(255,255,255,0.5); -fx-background-radius: 10;" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="close" fitHeight="37.0" fitWidth="37.0" layoutX="949.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="mini" fitHeight="37.0" fitWidth="37.0" layoutX="902.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
