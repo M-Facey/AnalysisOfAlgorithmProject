@@ -16,3 +16,8 @@ java -jar AnalysisOfAlgoritmProject.jar
 ```
 
 ... and you should be fine.
+
+## Contributed
+
+So I used the simplex method that was created by [j2kun](https://github.com/j2kun). Use this [link](https://github.com/j2kun/simplex-algorithm) to take you to the that repository.
+
