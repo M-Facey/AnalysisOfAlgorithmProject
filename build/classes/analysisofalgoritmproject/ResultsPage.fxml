@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #302B27;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="analysisofalgoritmproject.ResultsPageController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: rgba(48, 43, 39, 0.9);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="analysisofalgoritmproject.ResultsPageController">
    <children>
       <ScrollPane layoutX="14.0" layoutY="137.0" prefHeight="598.0" prefWidth="548.0">
          <content>
@@ -15,6 +16,9 @@
                   <Font size="20.0" />
                </font></Label>
          </content>
+         <padding>
+            <Insets left="15.0" />
+         </padding>
       </ScrollPane>
       <ScrollPane layoutX="579.0" layoutY="342.0" prefHeight="394.0" prefWidth="406.0" style="-fx-background: #274690; -fx-background-color: transparent;">
          <content>
@@ -56,5 +60,13 @@
       </Label>
       <ImageView fx:id="close" fitHeight="37.0" fitWidth="37.0" layoutX="949.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="mini" fitHeight="37.0" fitWidth="37.0" layoutX="902.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="title" layoutX="14.0" layoutY="21.0" prefHeight="106.0" prefWidth="468.0" text="RESULTS" textFill="WHITE">
+         <font>
+            <Font size="64.0" />
+         </font>
+         <padding>
+            <Insets right="4.0" />
+         </padding>
+      </Label>
    </children>
 </AnchorPane>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -7,29 +8,32 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="750.0" prefWidth="500.0" style="-fx-background-color: #302B27;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="analysisofalgoritmproject.OtherPageController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="750.0" prefWidth="500.0" style="-fx-background-color: rgba(48, 43, 39, 0.9);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="analysisofalgoritmproject.OtherPageController">
    <children>
-      <Label layoutX="41.0" layoutY="36.0" text="ITEMS" textFill="WHITE">
-         <font>
-            <Font size="96.0" />
-         </font>
-      </Label>
-      <ScrollPane layoutX="11.0" layoutY="170.0" prefHeight="502.0" prefWidth="479.0" style="-fx-background: #274690; -fx-background-color: transparent;">
+      <ScrollPane layoutX="11.0" layoutY="166.0" prefHeight="506.0" prefWidth="479.0" style="-fx-background: #274690; -fx-background-color: transparent;">
          <content>
             <AnchorPane fx:id="scrollpane" prefHeight="233.0" prefWidth="458.0" />
          </content>
       </ScrollPane>
-      <Button layoutX="322.0" layoutY="684.0" mnemonicParsing="false" onAction="#doSomething" prefHeight="51.0" prefWidth="168.0" text="CALCULATE">
+      <Button layoutX="322.0" layoutY="684.0" mnemonicParsing="false" onAction="#doSomething" prefHeight="51.0" prefWidth="168.0" style="-fx-background-color: #F5F3F5; -fx-background-radius: 100;" text="CALCULATE" textFill="#274690">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Button layoutX="14.0" layoutY="684.0" mnemonicParsing="false" onAction="#addConstraint" prefHeight="51.0" prefWidth="168.0" text="ADD">
+      <Button layoutX="14.0" layoutY="684.0" mnemonicParsing="false" onAction="#addConstraint" prefHeight="51.0" prefWidth="168.0" style="-fx-background-color: #F5F3F5; -fx-background-radius: 100;" text="ADD ITEM" textFill="#274690">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Button>
       <ImageView fx:id="close" fitHeight="37.0" fitWidth="37.0" layoutX="453.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="mini" fitHeight="37.0" fitWidth="37.0" layoutX="406.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="title" alignment="CENTER_RIGHT" layoutX="22.0" layoutY="51.0" prefHeight="106.0" prefWidth="468.0" text="CONSTRAINTS" textFill="WHITE">
+         <font>
+            <Font size="64.0" />
+         </font>
+         <padding>
+            <Insets right="4.0" />
+         </padding>
+      </Label>
    </children>
 </AnchorPane>

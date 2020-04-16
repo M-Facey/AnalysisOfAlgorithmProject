@@ -1,12 +1,7 @@
-
 package analysisofalgoritmproject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Stack;
@@ -28,17 +23,21 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class OtherPageController implements Initializable {
 
-    @FXML AnchorPane scrollpane, root;
+    @FXML private AnchorPane scrollpane, root;
     @FXML private ImageView close, mini;
     @FXML Stack<AnchorPane> itemStack = new Stack<>();
-    Process mProcess;
+    @FXML Label title;
     public static String result = "";
+    
     
     private double xOffset = 0;
     private double yOffset = 0;
@@ -61,21 +60,24 @@ public class OtherPageController implements Initializable {
         else {
             container.setLayoutY(itemStack.peek().getLayoutY() + 104.0);
         }
-        container.setStyle("-fx-background-color: pink; -fx-background-radius: 10px;");
+        container.setStyle("-fx-background-color: rgba(48, 43, 39, 0.74); -fx-background-radius: 10px;");
         
         container.getChildren().add(addField(216, 39, 14));
         container.getChildren().add(addField(101, 39, 273));
         
-        Label signs = new Label(">=");
+        Label signs = new Label("<=");
         signs.setFont(Font.font("System", FontWeight.BOLD, 24.0));
         signs.setLayoutX(237);
         signs.setLayoutY(27);
         container.getChildren().add(signs);
         
         Button delete = new Button("X");
-        delete.setPrefSize(44, 39);
+        delete.setFont(Font.font("System", FontWeight.BOLD, 18.0));
+        delete.setTextFill(Paint.valueOf("rgb(206,0,31)"));
+        delete.setPrefSize(44, 44);
         delete.setLayoutX(383);
-        delete.setLayoutY(25);
+        delete.setLayoutY(23);
+        delete.setStyle("-fx-background-color: white; -fx-background-radius: 100;");
         delete.setOnMouseClicked(event -> {
             rearrange(container);
             scrollpane.getChildren().remove(scrollpane.getChildren().lastIndexOf(container));
@@ -100,41 +102,63 @@ public class OtherPageController implements Initializable {
     }
     
     public void printResult() {
-        itemStack.forEach(pane -> {
+        itemStack.forEach(pane ->{
             TextField constraintRight = (TextField) pane.getChildren().get(1);
             MainPageController.quantityList.add(Integer.parseInt(constraintRight.getText()));
+            
             TextField constraintLeft = (TextField) pane.getChildren().get(0);
-            String[] sections = constraintLeft.getText().split(" \\+ ");
+            
+            // ASSUMES THAT YOU ONLY ADD AND SUBTRACT CONSTRAINTS
+            String cLeft = constraintLeft.getText();
+            String operator = null;
+            
+            String[] sections = null;
             int realSize = itemStack.size();
-            ArrayList<Integer> left = new ArrayList<>();
-            int size = MainPageController.nameList.size();
-            for(int k = 0; k < size; k++) {
-                left.add(0);
+            ArrayList<Float> left = new ArrayList<>();
+            ArrayList<Integer> orderOfOperations = new ArrayList<>();
+            int size = MainPageController.nameList.size(), i, cSize = cLeft.length();
+            boolean first = true;
+            
+            for(i = 0; i < cSize; i++) {
+                if(cLeft.charAt(i) == '+')
+                    orderOfOperations.add(0);
+                else if(cLeft.charAt(i) == '-')
+                    orderOfOperations.add(1);
             }
+            int oCounter = 0;
+            
+            cLeft = cLeft.replaceAll("\\+", "?").replaceAll("-", "?");
+            System.out.println(cLeft);
+            sections = cLeft.split(" \\? ");
+            
+            for(int k = 0; k < size; k++) {
+                left.add(0.0f);
+            }
+            
             for(String s: sections) {
+                
                 String[] item = s.split(" ");
-                if(item.length <= 3) 
+                
+                if(item.length > 3) { 
                     for(int k = 2; k < item.length; ++k) {
                         item[1] +=  " " + item[k];
                     }
-                if(MainPageController.nameList.contains(item[1])) {
-                    int i = MainPageController.nameList.indexOf(item[1]);
-                    left.set(i, Integer.parseInt(item[0]));
                 }
+                
+                if(MainPageController.nameList.contains(item[1])) {
+                    i = MainPageController.nameList.indexOf(item[1]);
+                    if(orderOfOperations.get(oCounter) == 0 || first)
+                        left.set(i, Float.parseFloat(item[0]) + left.get(i));
+                    else if(orderOfOperations.get(oCounter) == 1 && !first)
+                        left.set(i, Float.parseFloat(item[0]) * -1.0f + left.get(i));
+                }
+                if(!first)
+                    oCounter++;
+                first = false;
             }
             MainPageController.constraintLeft.add(left);
-          
+            
         });
-        
-        
-//        int size = MainPageController.constraintLeft.size();
-//        int size2 = MainPageController.nameList.size();
-//        for(int i = 0; i < size; i++) {
-//            for(int j = 0; j < size2; j++) {
-//                System.out.print(MainPageController.constraintLeft.get(i).get(j) + " ");
-//            }
-//            System.out.println("");
-//        }
     }
     
     public void doSomething(ActionEvent event) {
@@ -144,6 +168,7 @@ public class OtherPageController implements Initializable {
         try {
             root = loader.load();
             Scene scene = new Scene(root);
+            scene.setFill(Color.TRANSPARENT);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
@@ -171,16 +196,17 @@ public class OtherPageController implements Initializable {
             }
         });
         
-        close.setImage(new Image("/resources/close_grey.png"));
-        mini.setImage(new Image("/resources/mini_grey.png"));
+        close.setImage(new Image("/resources/close_grey.png", close.getFitWidth(), close.getFitHeight(), false, true));
+        mini.setImage(new Image("/resources/mini_grey.png", mini.getFitWidth(), mini.getFitHeight(), false, true));
+        title.setFont(Font.loadFont(getClass().getResource("/fonts/RobotoSlab-Bold.ttf").toExternalForm(), 64.0));
         
-        close.setOnMouseEntered(event -> { close.setImage(new Image("/resources/close_color.png")); });
+        close.setOnMouseEntered(event -> { close.setImage(new Image("/resources/close_color.png", close.getFitWidth(), close.getFitHeight(), false, true)); });
         close.setOnMouseClicked(event -> { Platform.exit(); });
-        close.setOnMouseExited(event -> { close.setImage(new Image("/resources/close_grey.png")); });
+        close.setOnMouseExited(event -> { close.setImage(new Image("/resources/close_grey.png", close.getFitWidth(), close.getFitHeight(), false, true)); });
         
-        mini.setOnMouseEntered(event -> { mini.setImage(new Image("/resources/mini_color.png")); });
+        mini.setOnMouseEntered(event -> { mini.setImage(new Image("/resources/mini_color.png", mini.getFitWidth(), mini.getFitHeight(), false, true)); });
         mini.setOnMouseClicked(event -> { ((Stage)((ImageView)event.getSource()).getScene().getWindow()).setIconified(true); });
-        mini.setOnMouseExited(event -> { mini.setImage(new Image("/resources/mini_grey.png")); });
+        mini.setOnMouseExited(event -> { mini.setImage(new Image("/resources/mini_grey.png", mini.getFitWidth(), mini.getFitHeight(), false, true)); });
     }    
     
 }

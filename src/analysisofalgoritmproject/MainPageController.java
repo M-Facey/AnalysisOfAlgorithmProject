@@ -24,11 +24,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class MainPageController implements Initializable {
     
@@ -43,7 +45,7 @@ public class MainPageController implements Initializable {
     public static ArrayList<Float> profitList = new ArrayList<>();
     public static ArrayList<Float> costList = new ArrayList<>();
     public static ArrayList<Integer> quantityList = new ArrayList<>();
-    public static ArrayList<ArrayList<Integer>> constraintLeft = new ArrayList<>();
+    public static ArrayList<ArrayList<Float>> constraintLeft = new ArrayList<>();
     public static ArrayList<String> nameList = new ArrayList<>();
     
     
@@ -51,12 +53,12 @@ public class MainPageController implements Initializable {
         boolean flag = false;
         int point = 0, size = itemStack.size();
         while(flag != true) {
-            ArrayList<Integer> left = new ArrayList<>();
+            ArrayList<Float> left = new ArrayList<>();
             for(int i = 0; i < size; i++) {
                 if(i == point)
-                    left.add(1);
+                    left.add(1.0f);
                 else
-                    left.add(0);
+                    left.add(0.0f);
             }
             constraintLeft.add(left);
             point++;
@@ -74,7 +76,8 @@ public class MainPageController implements Initializable {
             try {
                 parent = loader.load();
                 Scene scene = new Scene(parent);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene.setFill(Color.TRANSPARENT);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();  
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException ex) {
@@ -114,7 +117,7 @@ public class MainPageController implements Initializable {
         field.setLayoutX(x);
         field.setLayoutY(y);
         //field.setFont(Font.font("System", 17.0));
-        field.setFont(Font.loadFont(getClass().getResource("/fonts/Roboto-Light.ttf").toExternalForm(), 17.0));
+        field.setFont(Font.loadFont(getClass().getResource("/fonts/Roboto-Regular.ttf").toExternalForm(), 17.0));
         field.setPadding(new Insets(0, 0, 0, 5.0));
         field.setStyle("-fx-background-color: #576CA8;");
         return field;
@@ -153,7 +156,7 @@ public class MainPageController implements Initializable {
             // -- this is that one button
             Button delete = new Button();
             delete.setText("X");
-            delete.setFont(Font.font("System", 24.0));
+            delete.setFont(Font.font("System", FontWeight.BOLD, 24.0));
             delete.setTextFill(Paint.valueOf("white"));
             delete.setTextAlignment(TextAlignment.CENTER);
             delete.setPrefSize(67.0, 90.0);
@@ -222,17 +225,17 @@ public class MainPageController implements Initializable {
         root.getChildren().add(rippler);
         title.setFont(Font.loadFont(getClass().getResource("/fonts/RobotoSlab-Bold.ttf").toExternalForm(), 64.0));
         plusIcon.setImage(new Image("/resources/plus.png"));
-        close.setImage(new Image("/resources/close_grey.png"));
-        mini.setImage(new Image("/resources/mini_grey.png"));
+        close.setImage(new Image("/resources/close_grey.png", close.getFitWidth() + 20, close.getFitHeight() + 20, false, true));
+        mini.setImage(new Image("/resources/mini_grey.png", mini.getFitWidth(), mini.getFitHeight(), false, true));
         next.setImage(new Image("/resources/next1.png"));
         
         
-        close.setOnMouseEntered(event -> { close.setImage(new Image("/resources/close_color.png")); });
+        close.setOnMouseEntered(event -> { close.setImage(new Image("/resources/close_color.png", close.getFitWidth(), close.getFitHeight(), false, true)); });
         close.setOnMouseClicked(event -> { Platform.exit(); });
-        close.setOnMouseExited(event -> { close.setImage(new Image("/resources/close_grey.png")); });
+        close.setOnMouseExited(event -> { close.setImage(new Image("/resources/close_grey.png", close.getFitWidth(), close.getFitHeight(), false, true)); });
         
-        mini.setOnMouseEntered(event -> { mini.setImage(new Image("/resources/mini_color.png")); });
+        mini.setOnMouseEntered(event -> { mini.setImage(new Image("/resources/mini_color.png", mini.getFitWidth(), mini.getFitHeight(), false, true)); });
         mini.setOnMouseClicked(event -> { ((Stage)((ImageView)event.getSource()).getScene().getWindow()).setIconified(true); });
-        mini.setOnMouseExited(event -> { mini.setImage(new Image("/resources/mini_grey.png")); });
+        mini.setOnMouseExited(event -> { mini.setImage(new Image("/resources/mini_grey.png", mini.getFitWidth(), mini.getFitHeight(), false, true)); });
     }    
 }

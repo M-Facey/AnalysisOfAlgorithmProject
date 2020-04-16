@@ -22,8 +22,7 @@ public class AnalysisOfAlgoritmProject extends Application {
         
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
-        stage.setScene(scene);
-        //stage.initStyle(StageStyle.UNDECORATED);
+    stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.getIcons().add(new Image("/resources/calculator [icon made by Roundicons from www.flaticon.com].png"));
         

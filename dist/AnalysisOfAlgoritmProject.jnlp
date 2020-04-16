@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="AnalysisOfAlgoritmProject.jar" size="2365530" download="eager" />
+    <jar href="AnalysisOfAlgoritmProject.jar" size="2366996" download="eager" />
     <jar href="lib\jfoenix-8.0.8.jar" size="2708772" download="eager" />
     <jar href="lib\jython-standalone-2.7.2.jar" size="43056592" download="eager" />
   </resources>
